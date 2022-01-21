@@ -29,7 +29,7 @@ function Movies() {
     <Center>
       <SimpleGrid columns={5} spacing={6} mt={2}>
         {movies.map(movie => (
-          <Box maxW="sm" minW="md" borderWidth="1px" borderRadius="lg" overflow="hidden">
+          <Box key={movie?.id} maxW="sm" minW="md" borderWidth="1px" borderRadius="lg" overflow="hidden">
             <Image src={movie?.imageUrl} w="full" h={'80'} />
             <Box
               mt="1"
@@ -57,8 +57,9 @@ function Movies() {
         {movies.length === 0 &&
           Array(10)
             .fill(1)
-            .map(() => (
+            .map((_, index) => (
               <Box
+                key={index}
                 maxW="sm"
                 minW="md"
                 borderWidth="1px"

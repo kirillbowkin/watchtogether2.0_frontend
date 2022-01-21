@@ -13,6 +13,7 @@ import {
   useToast,
   position,
   Link,
+  Text,
 } from '@chakra-ui/react';
 import { UserContext } from '../context/UserContext';
 import { FiLogOut } from 'react-icons/fi';
@@ -47,35 +48,28 @@ function Profile() {
       >
         <Avatar size={'sm'} src={user?.avatarUrl} />
       </MenuButton>
-      <MenuList alignItems={'center'}>
+      <MenuList>
         <Center>
           <Avatar size={'xl'} src={user?.avatarUrl} />
         </Center>
         <Center>{user?.profileName}</Center>
         <Center>
           {user?.roles.map(role => (
-            <Badge colorScheme={role?.color} mr={2}>
+            <Badge key={role?.id} colorScheme={role?.color} mr={2}>
               {role?.name}
             </Badge>
           ))}
         </Center>
         <MenuDivider />
         <MenuItem>
-          <Button
-            as={ReachLink}
-            to="/admin/movies"
-            flex="1 0 0"
-            justifyContent="flex-start"
-          >
-            <Icon as={BiMovie} size="xs" mr={2} />
+          <Icon as={BiMovie} size="xs" mr={2} />
+          <Text as={ReachLink} to="/admin/movies">
             Manage movies
-          </Button>
+          </Text>
         </MenuItem>
-        <MenuItem>
-          <Button onClick={logout} flex="1 0 0" justifyContent="flex-start">
-            <Icon as={FiLogOut} size="xs" mr={2} />
-            Logout
-          </Button>
+        <MenuItem onClick={logout}>
+          <Icon as={FiLogOut} />
+          <Text ml={2}>Logout</Text>
         </MenuItem>
       </MenuList>
     </Menu>
