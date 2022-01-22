@@ -38,7 +38,7 @@ function Login() {
         setUser(user)
         localStorage.setItem("user", JSON.stringify(user))
 
-        console.log(response.data.tokens)
+        // console.log(response.data.tokens)
         setTokens(response.data.tokens)
         localStorage.setItem("tokens", JSON.stringify(response.data.tokens))
         toast({
@@ -66,7 +66,7 @@ function Login() {
       <Button variant="ghost" onClick={onLogin}>
         Login
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Login</ModalHeader>

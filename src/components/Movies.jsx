@@ -10,49 +10,25 @@ import {
   Skeleton,
   SkeletonCircle,
   SkeletonText,
+  useDisclosure,
 } from '@chakra-ui/react';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { MoviesContext } from '../context/MoviesContext';
+import MovieCard from './MovieCard';
 
-function Movies() {
-  const [movies, setMovies] = useState([]);
-  const [page, setPage] = useState(0);
-  const axios = require('axios');
+function Movies({ adminMode }) {
+  const context = useContext(MoviesContext)
+  const {movies, getMovies} = context
 
   useEffect(() => {
-    axios
-    .get(`/api/movies?page=${page}`)
-    .then(resopnse => setMovies(resopnse.data));
+    getMovies()
   }, []);
 
   return (
     <Center>
       <SimpleGrid columns={5} spacing={6} mt={2}>
         {movies.map(movie => (
-          <Box key={movie?.id} maxW="sm" minW="md" borderWidth="1px" borderRadius="lg" overflow="hidden">
-            <Image src={movie?.imageUrl} w="full" h={'80'} />
-            <Box
-              mt="1"
-              fontWeight="semibold"
-              as="h4"
-              lineHeight="tight"
-              isTruncated
-            >
-              {movie?.title}
-            </Box>
-            <Box as="span" color="gray.600">
-              {movie?.director}
-            </Box>
-            <Box mt="1" fontWeight="semibold" as="h4" lineHeight="tight">
-              {movie?.description}
-            </Box>
-            <Box>
-              <Badge>{movie?.genre}</Badge>
-            </Box>
-            <Link href={movie?.link} isExternal>
-              <Button>Watch</Button>
-            </Link>
-          </Box>
+          <MovieCard key={movie?.id} movie={movie} adminMode={adminMode} getMovies={getMovies} />
         ))}
         {movies.length === 0 &&
           Array(10)
@@ -73,7 +49,7 @@ function Movies() {
                 {/* <Link isExternal>
                   <Button>Watch</Button>
                 </Link> */}
-                <SkeletonCircle w={32}/>
+                <SkeletonCircle w={32} />
               </Box>
             ))}
       </SimpleGrid>
