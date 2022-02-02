@@ -1,24 +1,22 @@
-import React, { useContext } from 'react';
 import {
+  Avatar,
+  Badge,
+  Button,
+  Center,
+  Icon,
   Menu,
   MenuButton,
-  Avatar,
-  MenuList,
-  Center,
   MenuDivider,
   MenuItem,
-  Button,
-  Badge,
-  Icon,
-  useToast,
-  position,
-  Link,
+  MenuList,
   Text,
+  useToast,
 } from '@chakra-ui/react';
-import { UserContext } from '../context/UserContext';
-import { FiLogOut } from 'react-icons/fi';
+import React, { useContext } from 'react';
 import { BiMovie } from 'react-icons/bi';
+import { FiLogOut } from 'react-icons/fi';
 import { Link as ReachLink } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 
 function Profile() {
   const context = useContext(UserContext);
@@ -61,11 +59,9 @@ function Profile() {
           ))}
         </Center>
         <MenuDivider />
-        <MenuItem>
+        <MenuItem as={ReachLink} to="/admin/movies">
           <Icon as={BiMovie} size="xs" mr={2} />
-          <Text as={ReachLink} to="/admin/movies">
-            Manage movies
-          </Text>
+          <Text>Manage movies</Text>
         </MenuItem>
         <MenuItem onClick={logout}>
           <Icon as={FiLogOut} />

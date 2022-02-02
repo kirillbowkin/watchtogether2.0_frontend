@@ -1,8 +1,8 @@
-import React from 'react';
 import { Box } from '@chakra-ui/react';
-import Header from './components/Header';
-import Movies from './components/Movies';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { React } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from './components/header/Header';
+import Home from './components/home/Home';
 import ManageMovies from './components/ManageMovies';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Movies />} />
+          <Route path="/" element={<Home />} />
           <Route path="/admin/movies" element={<ManageMovies />} />
         </Routes>
       </Router>

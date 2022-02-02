@@ -8,48 +8,12 @@ import {
   AlertDialogOverlay,
   Button,
   useDisclosure,
-  useToast,
 } from '@chakra-ui/react';
-import React, { useContext } from 'react';
-import { UserContext } from '../context/UserContext';
+import React from 'react';
 
-function DeleteMovie({ id, getMovies }) {
+function DeleteMovie({ onDelete }) {
   const cancelRef = React.useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const axios = require('axios');
-  const toast = useToast();
-  const context = useContext(UserContext);
-  const { tokens } = context;
-
-  const onDelete = () => {
-    axios.defaults.headers = {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + tokens.access_token,
-    };
-
-    axios
-    .delete(`/api/movies/${id}`)
-    .then(() => {
-      onClose();
-      toast({
-        title: 'Movie deleted',
-        position: 'top',
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-      });
-      getMovies();
-    })
-    .catch(e =>
-        toast({
-          title: 'Error occured: ',
-          position: 'top',
-          status: 'error',
-          duration: 3000,
-          isClosable: true,
-        })
-      );
-  };
 
   return (
     <>

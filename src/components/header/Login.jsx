@@ -9,21 +9,20 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  position,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
 import React, { useContext } from 'react';
 import GoogleLogin from 'react-google-login';
 import { FcGoogle } from 'react-icons/fc';
-import { UserContext } from '../context/UserContext';
+import { UserContext } from '../../context/UserContext';
 
 function Login() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const axios = require('axios');
   const context = useContext(UserContext);
   const { setUser, setTokens } = context;
-  const toast = useToast()
+  const toast = useToast();
 
   const onLogin = () => {
     onOpen();
@@ -34,30 +33,28 @@ function Login() {
     axios
       .post(`/login?social_provider=google&social_token=${token}`)
       .then(function (response) {
-        const user = response.data.user
-        setUser(user)
-        localStorage.setItem("user", JSON.stringify(user))
+        const user = response.data.user;
+        setUser(user);
+        localStorage.setItem('user', JSON.stringify(user));
 
-        // console.log(response.data.tokens)
-        setTokens(response.data.tokens)
-        localStorage.setItem("tokens", JSON.stringify(response.data.tokens))
+        setTokens(response.data.tokens);
+        localStorage.setItem('tokens', JSON.stringify(response.data.tokens));
         toast({
           title: `You've been successfully logged in as ${user?.profileName}`,
-          position: "top",
-          status: "success",
+          position: 'top',
+          status: 'success',
           duration: 3000,
-          isClosable: true
-        })
+          isClosable: true,
+        });
       })
       .catch(function (response) {
-         toast({
-          title: "Error while logging in",
-          position: "top",
-          status: "error",
+        toast({
+          title: 'Error while logging in',
+          position: 'top',
+          status: 'error',
           duration: 3000,
-          isClosable: true
-        })
-       
+          isClosable: true,
+        });
       });
     onClose();
   };

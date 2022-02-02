@@ -1,39 +1,27 @@
-import { useForm } from 'react-hook-form';
-import { UserContext } from '../context/UserContext';
-import React, { useContext, useEffect, useState } from 'react';
-
 import {
-  Modal,
-  ModalOverlay,
-  ModalHeader,
-  ModalContent,
-  ModalBody,
-  ModalFooter,
-  FormControl,
-  FormLabel,
-  Input,
-  FormErrorMessage,
-  Image,
-  useToast,
-  SimpleGrid,
-  GridItem,
   Button,
-  Icon,
-  VStack,
-  Center,
-  HStack,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Image,
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
 } from '@chakra-ui/react';
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
-function SaveMovieModal({isOpen, onOpen, onClose, title, content, method, getMovies}) {
+function SaveMovieModal({ isOpen, onClose, title, content, onSubmit }) {
+  // TODO: think of neccessity of this
   const [image, setImage] = useState(content?.imageUrl);
 
-  const axios = require('axios');
-  const toast = useToast();
-  const context = useContext(UserContext);
-  const { tokens } = context;
-
   useEffect(() => {
-    reset();
+    reset(content);
+    setImage(content?.imageUrl);
   }, [isOpen]);
 
   const {
@@ -45,71 +33,9 @@ function SaveMovieModal({isOpen, onOpen, onClose, title, content, method, getMov
     defaultValues: {
       title: content?.title,
       link: content?.link,
-      imageUrl: content?.imageUrl
-    }
+      imageUrl: content?.imageUrl,
+    },
   });
-
-  const onSubmit = values => {
-    axios.defaults.headers = {
-      'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + tokens.access_token,
-    };
-
-    if(method === "post") {
-      axios
-      .post('/api/movies', {
-        ...values,
-      })
-      .then(() => {
-        onClose();
-        toast({
-          title: 'Movie added',
-          position: 'top',
-          status: 'success',
-          duration: 3000,
-          isClosable: true,
-        });
-        getMovies()
-      })
-      .catch(e =>
-        toast({
-          title: 'Error occured: ',
-          position: 'top',
-          status: 'error',
-          duration: 3000,
-          isClosable: true,
-        })
-      );
-    }
-
-    if(method === "put") {
-      axios
-      .put(`/api/movies/${content?.id}`, {
-        ...values,
-      })
-      .then(() => {
-        onClose();
-        toast({
-          title: 'Movie edited',
-          position: 'top',
-          status: 'success',
-          duration: 3000,
-          isClosable: true,
-        });
-        getMovies()
-      })
-      .catch(e =>
-        toast({
-          title: 'Error occured: ',
-          position: 'top',
-          status: 'error',
-          duration: 3000,
-          isClosable: true,
-        })
-        );
-      }
-    
-  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
