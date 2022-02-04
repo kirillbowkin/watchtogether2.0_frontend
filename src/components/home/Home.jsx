@@ -2,12 +2,14 @@ import { usePagination } from '@ajna/pagination';
 import { Box, useToast, VStack } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Movies from '../movie/Movies';
 import MovieSearch from '../movie/MovieSearch';
 import MyPagination from './MyPagination';
 
 function Home() {
   const toast = useToast();
+  const { state } = useLocation();
 
   const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState([]);
@@ -23,6 +25,16 @@ function Home() {
   });
 
   useEffect(() => {
+    if (state.showNotAllowed) {
+      toast({
+        title: 'You are not allowed to do this 😎',
+        position: 'top',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+
     searchTitle === '' ? fetchMovies() : searchMovies();
   }, [currentPage, searchTitle]);
 

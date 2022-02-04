@@ -20,7 +20,7 @@ import { UserContext } from '../../context/UserContext';
 
 function Profile() {
   const context = useContext(UserContext);
-  const { user, setUser } = context;
+  const { user, setUser, isAdmin } = context;
   const toast = useToast();
 
   const logout = () => {
@@ -59,10 +59,12 @@ function Profile() {
           ))}
         </Center>
         <MenuDivider />
-        <MenuItem as={ReachLink} to="/admin/movies">
-          <Icon as={BiMovie} size="xs" mr={2} />
-          <Text>Manage movies</Text>
-        </MenuItem>
+        {isAdmin && (
+          <MenuItem as={ReachLink} to="/admin/movies">
+            <Icon as={BiMovie} size="xs" mr={2} />
+            <Text>Manage movies</Text>
+          </MenuItem>
+        )}
         <MenuItem onClick={logout}>
           <Icon as={FiLogOut} />
           <Text ml={2}>Logout</Text>

@@ -9,10 +9,10 @@ import {
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { UserContext } from '../context/UserContext';
-import MyPagination from './home/MyPagination';
-import Movies from './movie/Movies';
-import MovieSearch from './movie/MovieSearch';
+import { UserContext } from '../../context/UserContext';
+import MyPagination from '../home/MyPagination';
+import Movies from './Movies';
+import MovieSearch from './MovieSearch';
 import SaveMovieModal from './SaveMovieModal';
 
 //TODO: refactor duplicating code

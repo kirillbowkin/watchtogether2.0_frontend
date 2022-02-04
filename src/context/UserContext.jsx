@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
 export const UserContext = createContext();
@@ -8,6 +8,11 @@ function UserContextProvider(props) {
   const [tokens, setTokens] = useState(
     JSON.parse(localStorage.getItem('tokens'))
   );
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    setIsAdmin(user?.roles.some(role => role?.name === 'ADMIN'));
+  }, [user]);
 
   const refresh = async () => {
     return axios
@@ -22,7 +27,9 @@ function UserContextProvider(props) {
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser, tokens, setTokens, refresh }}>
+    <UserContext.Provider
+      value={{ user, setUser, tokens, setTokens, refresh, isAdmin }}
+    >
       {props.children}
     </UserContext.Provider>
   );

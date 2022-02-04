@@ -44,6 +44,7 @@ function SaveMovieModal({ isOpen, onClose, title, content, onSubmit }) {
         <ModalHeader>{title}</ModalHeader>
         <ModalBody>
           <form onSubmit={handleSubmit(onSubmit)}>
+            {/* Title */}
             <FormControl isInvalid={errors.title}>
               <FormLabel>Title</FormLabel>
               <Input
@@ -64,6 +65,9 @@ function SaveMovieModal({ isOpen, onClose, title, content, onSubmit }) {
                 {errors.title && errors.title.message}
               </FormErrorMessage>
             </FormControl>
+            {/* Title */}
+
+            {/* Video Link */}
             <FormControl mt={2} isInvalid={errors.link}>
               <FormLabel>Video Link</FormLabel>
               <Input
@@ -84,6 +88,9 @@ function SaveMovieModal({ isOpen, onClose, title, content, onSubmit }) {
                 {errors.link && errors.link.message}
               </FormErrorMessage>
             </FormControl>
+            {/* Video link */}
+
+            {/* Image */}
             <FormControl mt={2} isInvalid={errors.imageUrl}>
               <FormLabel>Image</FormLabel>
               <Input
@@ -105,6 +112,77 @@ function SaveMovieModal({ isOpen, onClose, title, content, onSubmit }) {
               </FormErrorMessage>
             </FormControl>
             <Image mt={2} src={image} w="full" />
+            {/* Image */}
+
+            {/* Director */}
+            <FormControl mt={2} isInvalid={errors.director}>
+              <FormLabel>Director</FormLabel>
+              <Input
+                placeholder="Director"
+                {...register('director', {
+                  required: 'Director is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Minimum length should be 6',
+                  },
+                  maxLength: {
+                    value: 200,
+                    message: 'Maximum length is 20',
+                  },
+                })}
+              />
+              <FormErrorMessage>
+                {errors.director && errors.director.message}
+              </FormErrorMessage>
+            </FormControl>
+            {/* Director */}
+
+            {/* Decritption */}
+            <FormControl mt={2} isInvalid={errors.description}>
+              <FormLabel>Decritption</FormLabel>
+              <Input
+                placeholder="Decritption"
+                {...register('description', {
+                  required: 'Decritption is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Minimum length should be 6',
+                  },
+                  maxLength: {
+                    value: 200,
+                    message: 'Maximum length is 80',
+                  },
+                })}
+              />
+              <FormErrorMessage>
+                {errors.description && errors.description.message}
+              </FormErrorMessage>
+            </FormControl>
+            {/* Decritption */}
+
+            {/* Genre */}
+            <FormControl mt={2} isInvalid={errors.genre}>
+              <FormLabel>Genre</FormLabel>
+              <Input
+                placeholder="Genre"
+                {...register('genre', {
+                  required: 'Genre is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Minimum length should be 6',
+                  },
+                  maxLength: {
+                    value: 200,
+                    message: 'Maximum length is 20',
+                  },
+                })}
+              />
+              <FormErrorMessage>
+                {errors.genre && errors.genre.message}
+              </FormErrorMessage>
+            </FormControl>
+            {/* Genre */}
+
             <ModalFooter>
               <Button colorScheme="green" mr={3} type="submit">
                 Save

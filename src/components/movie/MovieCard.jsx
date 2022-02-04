@@ -8,7 +8,7 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import React from 'react';
-import DeleteMovie from '../DeleteMovie';
+import DeleteMovie from './DeleteMovie';
 
 function MovieCard({ movie, adminMode, onEdit, onDelete }) {
   return (

@@ -1,14 +1,20 @@
 import { Box, useToast } from '@chakra-ui/react';
-import { React, useContext, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { React, useContext, useEffect, useState } from 'react';
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import Header from './components/header/Header';
 import Home from './components/home/Home';
-import ManageMovies from './components/ManageMovies';
+import ManageMovies from './components/movie/ManageMovies';
 import { UserContext } from './context/UserContext';
 
+// TODO: Add backroung image or sth
 function App() {
   const context = useContext(UserContext);
-  const { refresh, setTokens, setUser, tokens } = context;
+  const { refresh, setTokens, setUser, tokens, isAdmin } = context;
 
   const toast = useToast();
 
@@ -42,7 +48,21 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/admin/movies" element={<ManageMovies />} />
+          <Route
+            path="/admin/movies"
+            element={
+              isAdmin ? (
+                <ManageMovies />
+              ) : (
+                <Navigate
+                  to="/"
+                  state={{
+                    showNotAllowed: true,
+                  }}
+                />
+              )
+            }
+          />
         </Routes>
       </Router>
     </Box>
