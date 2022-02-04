@@ -18,7 +18,7 @@ function App() {
       setTokens(null);
     });
 
-    const fiveMinutes = 5 * 60 * 1000;
+    const tenMinutes = 10 * 60 * 1000;
     const interval = setInterval(() => {
       if (tokens !== null) {
         refresh().catch(() =>
@@ -31,7 +31,7 @@ function App() {
           })
         );
       }
-    }, fiveMinutes);
+    }, tenMinutes);
 
     return () => clearInterval(interval);
   }, []);
