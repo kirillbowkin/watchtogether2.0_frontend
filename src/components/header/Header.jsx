@@ -24,7 +24,7 @@ function Header() {
       {/* <MovieSearch /> */}
       <HStack>
         {user ? <Profile /> : <Login />}
-        <ColorModeSwitcher />
+        {/* <ColorModeSwitcher /> */}
       </HStack>
     </HStack>
   );

@@ -12,7 +12,14 @@ import DeleteMovie from './DeleteMovie';
 
 function MovieCard({ movie, adminMode, onEdit, onDelete }) {
   return (
-    <Box w={['xs', 'xs', 'xs', 'md']} borderWidth="1px" borderRadius="lg" p={2}>
+    <Box
+      w={['xs', 'xs', 'xs', 'md']}
+      borderWidth="1px"
+      borderRadius="lg"
+      p={2}
+      backdropFilter="auto"
+      backdropBlur="lg"
+    >
       <Flex flexDir="column" justifyContent="space-between" h="full">
         <Box>
           <Image src={movie?.imageUrl} w="full" h="md" />
