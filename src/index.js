@@ -3,7 +3,9 @@ import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import UserContextProvider from './context/UserContext';
+import axios from 'axios';
 
+axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 ReactDOM.render(
   <StrictMode>
     <ColorModeScript />

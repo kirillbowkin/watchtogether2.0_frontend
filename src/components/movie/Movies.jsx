@@ -5,7 +5,7 @@ import {
   SkeletonCircle,
   SkeletonText,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import MovieCard from './MovieCard';
 
 function Movies({ movies, adminMode, isLoading, onEdit, onDelete }) {
@@ -31,8 +31,7 @@ function Movies({ movies, adminMode, isLoading, onEdit, onDelete }) {
             </Box>
           ))}
       {!isLoading &&
-        movies.length !== 0 &&
-        movies.map(movie => (
+        movies?.map(movie => (
           <MovieCard
             key={movie?.id}
             movie={movie}

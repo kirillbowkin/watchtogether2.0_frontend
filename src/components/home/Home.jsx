@@ -23,7 +23,7 @@ function Home() {
   });
 
   useEffect(() => {
-    searchTitle ? searchMovies() : fetchMovies();
+    searchTitle === '' ? fetchMovies() : searchMovies();
   }, [currentPage, searchTitle]);
 
   const fetchMovies = async () => {
@@ -48,6 +48,7 @@ function Home() {
       .finally(setIsLoading(false));
   };
 
+  //TODO: this is probaby bad
   const onSearch = title => {
     setSearchTitle(title);
     setCurrentPage(1);

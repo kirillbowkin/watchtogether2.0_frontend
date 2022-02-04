@@ -15,7 +15,7 @@ import Movies from './movie/Movies';
 import MovieSearch from './movie/MovieSearch';
 import SaveMovieModal from './SaveMovieModal';
 
-//TODO: refactor duplicate code
+//TODO: refactor duplicating code
 function ManageMovies() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();

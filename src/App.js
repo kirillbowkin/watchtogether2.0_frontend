@@ -1,11 +1,41 @@
-import { Box } from '@chakra-ui/react';
-import { React } from 'react';
+import { Box, useToast } from '@chakra-ui/react';
+import { React, useContext, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/header/Header';
 import Home from './components/home/Home';
 import ManageMovies from './components/ManageMovies';
+import { UserContext } from './context/UserContext';
 
 function App() {
+  const context = useContext(UserContext);
+  const { refresh, setTokens, setUser, tokens } = context;
+
+  const toast = useToast();
+
+  useEffect(() => {
+    refresh().catch(() => {
+      setUser(null);
+      setTokens(null);
+    });
+
+    const fiveMinutes = 5 * 60 * 1000;
+    const interval = setInterval(() => {
+      if (tokens !== null) {
+        refresh().catch(() =>
+          toast({
+            title: 'Something went wrong 🤔',
+            position: 'top',
+            status: 'error',
+            duration: 3000,
+            isClosable: true,
+          })
+        );
+      }
+    }, fiveMinutes);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <Box>
       <Router>
