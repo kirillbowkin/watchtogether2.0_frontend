@@ -9,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Tooltip,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
@@ -60,9 +61,11 @@ function Login() {
   };
   return (
     <>
-      <Button variant="ghost" onClick={onLogin}>
-        Login
-      </Button>
+      <Tooltip label="Login" placement="bottom-start">
+        <Button variant="ghost" onClick={onLogin}>
+          Login
+        </Button>
+      </Tooltip>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>

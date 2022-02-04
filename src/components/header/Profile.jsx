@@ -10,6 +10,7 @@ import {
   MenuItem,
   MenuList,
   Text,
+  Tooltip,
   useToast,
 } from '@chakra-ui/react';
 import React, { useContext } from 'react';
@@ -39,15 +40,17 @@ function Profile() {
 
   return (
     <Menu>
-      <MenuButton
-        as={Button}
-        rounded={'full'}
-        variant={'link'}
-        cursor={'pointer'}
-        minW={0}
-      >
-        <Avatar size={'sm'} src={user?.avatarUrl} />
-      </MenuButton>
+      <Tooltip label="Profile" placement="bottom-start">
+        <MenuButton
+          as={Button}
+          rounded={'full'}
+          variant={'link'}
+          cursor={'pointer'}
+          minW={0}
+        >
+          <Avatar size={'sm'} src={user?.avatarUrl} />
+        </MenuButton>
+      </Tooltip>
       <MenuList>
         <Center>
           <Avatar size={'xl'} src={user?.avatarUrl} />

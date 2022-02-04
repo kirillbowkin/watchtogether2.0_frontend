@@ -9,6 +9,7 @@ import {
 import Header from './components/header/Header';
 import Home from './components/home/Home';
 import ManageMovies from './components/movie/ManageMovies';
+import WatchTogether from './components/watchtogether/WatchTogether';
 import { UserContext } from './context/UserContext';
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
               )
             }
           />
+          <Route path="/watchtogether" element={<WatchTogether />} />
         </Routes>
       </Router>
     </Box>

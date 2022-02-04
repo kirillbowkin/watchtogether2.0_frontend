@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import UserContextProvider from './context/UserContext';
 import axios from 'axios';
+import 'video-react/dist/video-react.css'; // import css
 
 axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
 ReactDOM.render(

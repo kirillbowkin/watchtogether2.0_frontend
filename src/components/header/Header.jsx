@@ -1,10 +1,16 @@
-import { HStack, Link, Text, useColorModeValue } from '@chakra-ui/react';
+import {
+  HStack,
+  IconButton,
+  Link,
+  Text,
+  Tooltip,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import React, { useContext } from 'react';
+import { FaTheaterMasks } from 'react-icons/fa';
 import { Link as ReactLink } from 'react-router-dom';
-import { ColorModeSwitcher } from '../../ColorModeSwitcher';
 import { UserContext } from '../../context/UserContext';
 import Login from './Login';
-import MovieSearch from '../movie/MovieSearch';
 import Profile from './Profile';
 
 function Header() {
@@ -23,6 +29,15 @@ function Header() {
       </Link>
       {/* <MovieSearch /> */}
       <HStack>
+        <Tooltip label="WatchTogether" placement="bottom-start">
+          <IconButton
+            icon={<FaTheaterMasks />}
+            variant="ghost"
+            fontSize="2xl"
+            as={ReactLink}
+            to="/watchtogether"
+          />
+        </Tooltip>
         {user ? <Profile /> : <Login />}
         {/* <ColorModeSwitcher /> */}
       </HStack>

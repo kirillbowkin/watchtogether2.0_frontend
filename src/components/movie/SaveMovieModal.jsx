@@ -16,7 +16,6 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 function SaveMovieModal({ isOpen, onClose, title, content, onSubmit }) {
-  // TODO: think of neccessity of this
   const [image, setImage] = useState(content?.imageUrl);
 
   useEffect(() => {
