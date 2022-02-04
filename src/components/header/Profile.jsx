@@ -15,15 +15,17 @@ import {
 import React, { useContext } from 'react';
 import { BiMovie } from 'react-icons/bi';
 import { FiLogOut } from 'react-icons/fi';
-import { Link as ReachLink } from 'react-router-dom';
+import { Link as ReachLink, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
 function Profile() {
   const context = useContext(UserContext);
   const { user, setUser, isAdmin } = context;
   const toast = useToast();
+  const navigate = useNavigate();
 
   const logout = () => {
+    navigate('/');
     setUser(null);
     localStorage.removeItem('user');
     toast({

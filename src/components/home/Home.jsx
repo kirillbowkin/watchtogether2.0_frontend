@@ -25,7 +25,7 @@ function Home() {
   });
 
   useEffect(() => {
-    if (state.showNotAllowed) {
+    if (state?.showNotAllowed) {
       toast({
         title: 'You are not allowed to do this 😎',
         position: 'top',
