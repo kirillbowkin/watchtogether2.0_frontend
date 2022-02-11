@@ -16,6 +16,7 @@ import {
 import React, { useContext } from 'react';
 import { BiMovie } from 'react-icons/bi';
 import { FiLogOut } from 'react-icons/fi';
+import { HiViewBoards } from 'react-icons/hi';
 import { Link as ReachLink, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
@@ -65,10 +66,16 @@ function Profile() {
         </Center>
         <MenuDivider />
         {isAdmin && (
-          <MenuItem as={ReachLink} to="/admin/movies">
-            <Icon as={BiMovie} size="xs" mr={2} />
-            <Text>Manage movies</Text>
-          </MenuItem>
+          <>
+            <MenuItem as={ReachLink} to="/admin/movies">
+              <Icon as={BiMovie} size="xs" mr={2} />
+              <Text>Manage movies</Text>
+            </MenuItem>
+            <MenuItem as={ReachLink} to="/admin/rooms">
+              <Icon as={HiViewBoards} size="xs" mr={2} />
+              <Text>Manage rooms</Text>
+            </MenuItem>
+          </>
         )}
         <MenuItem onClick={logout}>
           <Icon as={FiLogOut} />

@@ -9,6 +9,7 @@ import {
 import Header from './components/header/Header';
 import Home from './components/home/Home';
 import ManageMovies from './components/movie/ManageMovies';
+import ManageRooms from './components/room/ManageRooms';
 import WatchTogether from './components/watchtogether/WatchTogether';
 import { UserContext } from './context/UserContext';
 
@@ -46,7 +47,7 @@ function App() {
 
   return (
     <Box
-      backgroundImage="https://images.unsplash.com/photo-1553095066-5014bc7b7f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80"
+      // backgroundImage="https://images.unsplash.com/photo-1553095066-5014bc7b7f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1742&q=80"
       h="100vh"
       backgroundSize="cover"
     >
@@ -54,19 +55,22 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          {/* BUG: Impossible to use routes below if it causes page reload */}
+          {isAdmin && (
+            <>
+              <Route path="/admin/movies" element={<ManageMovies />} />
+              <Route path="/admin/rooms" element={<ManageRooms />} />
+            </>
+          )}
           <Route
-            path="/admin/movies"
+            path="*"
             element={
-              isAdmin ? (
-                <ManageMovies />
-              ) : (
-                <Navigate
-                  to="/"
-                  state={{
-                    showNotAllowed: true,
-                  }}
-                />
-              )
+              <Navigate
+                to="/"
+                state={{
+                  showNotAllowed: true,
+                }}
+              />
             }
           />
           <Route path="/watchtogether" element={<WatchTogether />} />
