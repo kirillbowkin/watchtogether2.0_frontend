@@ -10,6 +10,7 @@ import Header from './components/header/Header';
 import Home from './components/home/Home';
 import ManageMovies from './components/movie/ManageMovies';
 import ManageRooms from './components/room/ManageRooms';
+import Rooms from './components/watchtogether/Rooms';
 import WatchTogether from './components/watchtogether/WatchTogether';
 import { UserContext } from './context/UserContext';
 
@@ -62,6 +63,7 @@ function App() {
               <Route path="/admin/rooms" element={<ManageRooms />} />
             </>
           )}
+          <Route path="/rooms" element={<Rooms />} />
           <Route
             path="*"
             element={

@@ -35,7 +35,7 @@ function Header() {
             variant="ghost"
             fontSize="2xl"
             as={ReactLink}
-            to="/watchtogether"
+            to="/rooms"
           />
         </Tooltip>
         {user ? <Profile /> : <Login />}
