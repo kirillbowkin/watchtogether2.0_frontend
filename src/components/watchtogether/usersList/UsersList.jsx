@@ -2,7 +2,7 @@ import { Avatar, Box, HStack, Text, VStack } from '@chakra-ui/react';
 
 function UsersList({ users }) {
   return (
-    <HStack py={2}>
+    <HStack p={2}>
       {users?.map(user => (
         <VStack>
           <Avatar src={user?.avatarUrl} />

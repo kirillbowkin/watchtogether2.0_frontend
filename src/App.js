@@ -75,7 +75,8 @@ function App() {
               />
             }
           />
-          <Route path="/watchtogether" element={<WatchTogether />} />
+          {/* <Route path="/watchtogether" element={<WatchTogether />} /> */}
+          <Route path="/rooms/:id" element={<WatchTogether />} />
         </Routes>
       </Router>
     </Box>
