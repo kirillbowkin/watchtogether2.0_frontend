@@ -25,7 +25,7 @@ function WatchTogether() {
   // ];
 
   const [users, setUsers] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isJoined, setIsJoined] = useState(false);
 
   const context = useContext(UserContext);
   const { tokens } = context;
@@ -42,7 +42,8 @@ function WatchTogether() {
 
   const toast = useToast();
 
-  const login = async () => {
+  const join = async () => {
+    console.log('in join');
     axios.defaults.headers = {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + tokens.access_token,
@@ -51,7 +52,7 @@ function WatchTogether() {
     axios
       .post(`/api/watchRooms/join/${roomId}`)
       .then(() => {
-        setIsLoggedIn(true);
+        setIsJoined(true);
         fetchRoomInfo();
       })
       .catch(() => {
@@ -66,6 +67,7 @@ function WatchTogether() {
   };
 
   const leave = async () => {
+    console.log('in leave');
     axios.defaults.headers = {
       'Content-Type': 'application/json',
       Authorization: 'Bearer ' + tokens.access_token,
@@ -73,12 +75,12 @@ function WatchTogether() {
 
     axios
       .delete(`/api/watchRooms/leave/${roomId}`)
-      .then(() => navigate('/rooms'))
-      .catch(() => {
+      .then()
+      .catch(e => {
         navigate('/rooms');
         toast({
           ...defaultToast,
-          title: 'Error occured',
+          title: `Error occured ${e}`,
           status: 'error',
         });
       });
@@ -94,15 +96,24 @@ function WatchTogether() {
   };
 
   useEffect(() => {
-    login();
-    // fetchRoomInfo();
+    join();
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isJoined) {
       return () => leave();
     }
-  }, [isLoggedIn]);
+  }, [isJoined]);
+
+  useEffect(() => {
+    window.onbeforeunload = function () {
+      leave();
+    };
+
+    return () => {
+      window.onbeforeunload = null;
+    };
+  }, []);
 
   return (
     <Flex flexDir="column">
